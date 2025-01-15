@@ -1,0 +1,11 @@
+* {
+    box-sizing: border-box;
+    margin: 0vw;
+}
+
+.gen {
+    width: 10vw;
+    height: 3vw;
+    background-color: blue;
+    margin-left: 5vw;
+}
