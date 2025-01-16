@@ -3,3 +3,6 @@ custom_tools/bmpToFrame/bin/Debug/bmpToFrame.exe
 custom_tools/bmpToFrame/bmpToFrame.cbp
 custom_tools/bmpToFrame/obj/Debug/main.o
 custom_tools/bmpToFrame/out.frame
+custom_tools/bmpToFrame/bmpToFrame.depend
+custom_tools/bmpToFrame/bin/Release/bmpToFrame.exe
+custom_tools/bmpToFrame/obj/Release/main.o
