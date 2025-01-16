@@ -15,12 +15,10 @@ def drawTxt(txt, x, y): oled.text(txt, x, y)
 def refresh(): oled.show()
 
 def drawFrame(name):
-    cls()
     f = open(f"netesp/frames/{ name }.frame", "r")
     for y, l in enumerate(f.readlines()):
         for x, c in enumerate(l):
             if (c == '1'): drawPixel(x, y, 1)
-            else: drawPixel(x, y, 0)
     
     refresh()
     f.close()
