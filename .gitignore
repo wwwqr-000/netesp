@@ -6,3 +6,4 @@ custom_tools/bmpToFrame/out.frame
 custom_tools/bmpToFrame/bmpToFrame.depend
 custom_tools/bmpToFrame/bin/Release/bmpToFrame.exe
 custom_tools/bmpToFrame/obj/Release/main.o
+esp32/netesp/frames/welcome.frame
