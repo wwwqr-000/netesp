@@ -1,11 +1,13 @@
 from machine import I2C, Pin
+from netesp import config
 import ssd1306
-
-i2c = I2C(0, scl=Pin(26), sda=Pin(25))
-oled = ssd1306.SSD1306_I2C(128, 64, i2c)
 
 maxWidth = 127
 maxHeight = 63
+
+i2c = I2C(0, scl=Pin(config.screenSCL), sda=Pin(config.screenSDA))
+oled = ssd1306.SSD1306_I2C(maxWidth + 1, maxHeight + 1, i2c)
+
 
 def cls(): oled.fill(0)
 def drawPixel(x, y, stat): oled.pixel(x, y, stat)
