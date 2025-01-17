@@ -33,6 +33,6 @@ def drawMain():
     
 def changeMainMenuIndex(direction):
     global mainIndex, mainItems
-    arr = changeMenuIndex("main", direction, drawMain, mainItems, mainIndex)
-    mainIndex = arr[0]
-    drawMain()
+    oldIndex = mainIndex
+    mainIndex = changeMenuIndex("main", direction, mainItems, mainIndex)
+    if (oldIndex != mainIndex): drawMain()
