@@ -40,4 +40,4 @@ def keyListener():
 
         else: enterCooldown = False
     
-thread.start_new_thread(keyListener, ())
+def start(): thread.start_new_thread(keyListener, ())
