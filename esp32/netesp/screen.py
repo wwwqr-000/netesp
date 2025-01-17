@@ -33,5 +33,9 @@ def drawIcon(name, xOffset, yOffset):
             drawPixel(x, y, 1)
         except Exception:
             print("Could not draw icon. Invalid format.")
+            f.close()
             return
+    
+    refresh()
+    f.close()
         
