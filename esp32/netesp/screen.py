@@ -14,11 +14,13 @@ def drawPixel(x, y, stat): oled.pixel(x, y, stat)
 def drawTxt(txt, x, y): oled.text(txt, x, y)
 def refresh(): oled.show()
 
-def drawFrame(name):
+def drawFrame(name, xOffset, yOffset):
     f = open(f"netesp/frames/{ name }.frame", "r")
     for y, l in enumerate(f.readlines()):
         for x, c in enumerate(l):
-            if (c == '1'): drawPixel(x, y, 1)
+            if (c == '1'): drawPixel(x + xOffset, y + yOffset, 1)
     
     refresh()
     f.close()
+
+def drawFrame(name): drawFrame(name, 0, 0)
