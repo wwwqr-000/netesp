@@ -22,5 +22,3 @@ def drawFrame(name, xOffset, yOffset):
     
     refresh()
     f.close()
-
-def drawFrame(name): drawFrame(name, 0, 0)
