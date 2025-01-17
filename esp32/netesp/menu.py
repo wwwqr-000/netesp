@@ -6,6 +6,18 @@ current = "main"
 mainIndex = 0
 mainItems = ["Wifi", "Bluetooth", "Help", "Credits"]
 
+def changeMenuIndex(menuName, direction, menuItems, menuIndex):
+    if (current == menuName):
+        itemCount = len(menuItems) - 1#Index based
+        if (direction == "up" and (menuIndex - 1) >= 0):
+            menuIndex -= 1
+        
+        elif (direction == "down" and (menuIndex + 1) <= itemCount):
+            menuIndex += 1
+            
+    return menuIndex
+
+
 def drawMain():
     begin = 12
     screen.cls()
@@ -18,3 +30,9 @@ def drawMain():
     arrowY = -2 + (10 * mainIndex)
     screen.drawIcon("arrow_left", 0, arrowY)
     screen.refresh()
+    
+def changeMainMenuIndex(direction):
+    global mainIndex, mainItems
+    arr = changeMenuIndex("main", direction, drawMain, mainItems, mainIndex)
+    mainIndex = arr[0]
+    drawMain()

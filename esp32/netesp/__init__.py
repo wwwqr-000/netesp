@@ -8,12 +8,10 @@ screen.refresh()
 
 screen.cls()
 screen.drawFrame("whiteavocado", 0, 5)
-sleep(1)
-
 screen.cls()
-screen.refresh()
 
 menu.drawMain()
+screen.refresh()
 
 while True:
     sleep(0.1)

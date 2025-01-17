@@ -20,14 +20,14 @@ def drawFrame(name, xOffset, yOffset):
     refresh()
     f.close()
     
-def drawIcon(name, xOffset, yOffset):
+def drawIcon(name, xOffset, yOffset, active = 1):
     f = open(f"netesp/icons/{ name }.icon", "r")
     for l in f.readlines():
         try:
             tmpArr = l.split(',')
             x = int(tmpArr[0]) + xOffset
             y = int(tmpArr[1]) + yOffset
-            drawPixel(x, y, 1)
+            drawPixel(x, y, active)
         except Exception:
             print("Could not draw icon. Invalid format.")
             f.close()
@@ -35,4 +35,3 @@ def drawIcon(name, xOffset, yOffset):
     
     refresh()
     f.close()
-        
