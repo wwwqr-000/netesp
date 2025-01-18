@@ -1,6 +1,5 @@
 from machine import I2C, Pin
-from netesp import config
-import ssd1306
+from netesp import config, ssd1306 
 
 i2c = I2C(0, scl=Pin(config.screenSCL), sda=Pin(config.screenSDA))
 oled = ssd1306.SSD1306_I2C(config.screenWidth + 1, config.screenHeight + 1, i2c)
@@ -13,7 +12,8 @@ def refresh(): oled.show()
 
 def drawFrame(name, xOffset, yOffset):
     f = open(f"netesp/frames/{ name }.frame", "r")
-    for y, l in enumerate(f.readlines()):
+    lines = f.readlines()
+    for y, l in enumerate(lines):
         for x, c in enumerate(l):
             if (c == '1'): drawPixel(x + xOffset, y + yOffset, 1)
     

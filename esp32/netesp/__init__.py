@@ -1,4 +1,4 @@
-from netesp import config, screen, bus, menu, keyRegistry
+from netesp import config, screen, bus, menu, keyRegistry, superGlobal
 from time import sleep
 
 bus.start()
@@ -10,9 +10,7 @@ screen.cls()
 screen.drawFrame("whiteavocado", 0, 5)
 screen.cls()
 
-menu.drawMain()
+superGlobal.drawMenu(superGlobal.getMenu("main"))
 screen.refresh()
 
-while True:
-    sleep(0.1)
-    print("marf")
+while True: sleep(0.1)
