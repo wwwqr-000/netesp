@@ -15,6 +15,7 @@ rBtnCooldown = False
 lBtnCooldown = False
 enterCooldown = False
 
+#Every stored function is contained in a tuple, also containing parameter values: (func, param)
 
 def keyListener():
     while True:
@@ -22,21 +23,27 @@ def keyListener():
         if (rBtn.value() == 1):
             if (rBtnCooldown): continue
             rBtnCooldown = True
-            for f in rBtnFunctions: f()
+            for f in rBtnFunctions:
+                func, arg = f
+                func(arg)
         
         else: rBtnCooldown = False
 
         if (lBtn.value() == 0):
             if (lBtnCooldown): continue
             lBtnCooldown = True
-            for f in lBtnFunctions: f()
+            for f in lBtnFunctions:
+                func, arg = f
+                func(arg)
 
         else: lBtnCooldown = False
 
         if (enter.value() == 0):
             if (enterCooldown): continue
             enterCooldown = True
-            for f in enterFunctions: f()
+            for f in enterFunctions:
+                func, arg = f
+                func(arg)
 
         else: enterCooldown = False
     
