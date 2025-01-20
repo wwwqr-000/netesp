@@ -3,7 +3,7 @@ from time import sleep
 
 bus.start()
 
-screen.drawTxt("Loading...", 0, 0)
+screen.drawTxt("Loading test...", 0, 0)
 screen.refresh()
 
 screen.cls()
