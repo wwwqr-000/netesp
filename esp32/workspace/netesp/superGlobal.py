@@ -36,7 +36,7 @@ def drawScreen(screenObj):
     
     begin = 12
     screen.cls()
-    screen.drawFrame(screenObj.frame)
+    screen.drawFrame(screenObj.frame, 0, 0)
     for i, e in enumerate(screenObj.textArr):
         screen.drawTxt(e, 10, begin)
         begin += 10
