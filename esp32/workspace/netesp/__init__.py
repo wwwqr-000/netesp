@@ -11,7 +11,7 @@ screen.cls()
 bus.start()
 keyRegistry.register()
 
-superGlobal.drawMenu(superGlobal.getMenu("main"))
+superGlobal.drawMenu(superGlobal.getMenuOrScreen("main"))
 screen.refresh()
 
 while True: sleep(0.1)

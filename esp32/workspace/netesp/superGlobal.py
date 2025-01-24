@@ -3,21 +3,16 @@ from netesp import menu, screen
 menus = []
 currentMenuName = "main"
 
-def getMenu(menuName):
+def getMenuOrScreen(menuName):
     for m in menus:
         if (m.name == menuName): return m
     
     return "!"
 
-def getScreen(screenName):
-    for s in menus:
-        if (s.name == screenName): return s
-        
-    return "!"
-
 def drawMenu(menObj):
     global currentMenuName
     currentMenuName = menObj.name
+    print(f"Drawing menu { currentMenuName }...")
     begin = 12
     screen.cls()
     screen.drawFrame(menObj.frame, 0, 0)
@@ -43,32 +38,33 @@ def drawScreen(screenObj):
     
     screen.refresh()
         
-def menuIndexSwitch(menuName, inc):
-    men = getMenu(menuName)
-    if (men == "!"): return
+def menuIndexSwitch(inc):
+    men = getMenuOrScreen(currentMenuName)
+    if (men == "!" or isinstance(men, menu.Screen)): return
     index = men.itemIndex + inc
     if (index > (len(men.items) - 1) or index < 0): return
     men.itemIndex = index
     drawMenu(men)
     
-def triggerMenuItem(menuOrScreenName):#For Screen and Menu obj's
-    men = getMenu(menuOrScreenName)
-    if (men != "!"):
-        itemName, payload = men.items[men.itemIndex]
+def triggerItem(emptyArg):#For Screen and Menu obj's
+    obj = getMenuOrScreen(currentMenuName)
+    if (obj == "!"): return
+    
+    if (isinstance(obj, menu.Menu)):
+        itemName, payload = obj.items[obj.itemIndex]
         callback, funcWArg = payload
         func, arg = funcWArg
         callback(func(arg))
     
-    else:
-        scrn = getScreen(menuOrScreenName)
-        if (scrn == "!"): return
-        callback, funcWArg = scrn.callback
+    elif (isinstance(obj, menu.Screen)):
+        callback, funcWArg = obj.callback
         func, arg = funcWArg
         callback(func(arg))
+        
     
 #Menu and Screen register
-credits = menu.Screen("credits", "gui", ["test1", "test2"], (drawMenu, (getMenu, "main")))
-main = menu.Menu("main", [("Wifi", (drawMenu, (getMenu, "wifi"))), ("Bluetooth", (drawMenu, (getMenu, "bluetooth"))), ("Help", (drawScreen, (getScreen, "help"))), ("Credits", (drawScreen, (getScreen, "credits")))], "gui")
+credits = menu.Screen("credits", "gui", ["test1", "test2"], (drawMenu, (getMenuOrScreen, "main")))
+main = menu.Menu("main", [("Wifi", (drawMenu, (getMenuOrScreen, "wifi"))), ("Bluetooth", (drawMenu, (getMenuOrScreen, "bluetooth"))), ("Help", (drawScreen, (getMenuOrScreen, "help"))), ("Credits", (drawScreen, (getMenuOrScreen, "credits")))], "gui")
 menus.append(main)
 menus.append(credits)
 #
