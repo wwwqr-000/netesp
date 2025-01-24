@@ -63,7 +63,7 @@ def triggerItem(emptyArg):#For Screen and Menu obj's
         
     
 #Menu and Screen register
-credits = menu.Screen("credits", "gui", ["test1", "test2"], (drawMenu, (getMenuOrScreen, "main")))
+credits = menu.Screen("credits", "credits", ["wwwqr"], (drawMenu, (getMenuOrScreen, "main")))
 main = menu.Menu("main", [("Wifi", (drawMenu, (getMenuOrScreen, "wifi"))), ("Bluetooth", (drawMenu, (getMenuOrScreen, "bluetooth"))), ("Help", (drawScreen, (getMenuOrScreen, "help"))), ("Credits", (drawScreen, (getMenuOrScreen, "credits")))], "gui")
 menus.append(main)
 menus.append(credits)
