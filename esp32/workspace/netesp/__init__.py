@@ -1,7 +1,7 @@
 from netesp import config, screen, bus, menu, keyRegistry, superGlobal
 from time import sleep
 
-screen.drawTxt("Loading test...", 0, 0)
+screen.drawTxt("Loading espnet...", 0, 0)
 screen.refresh()
 
 screen.cls()

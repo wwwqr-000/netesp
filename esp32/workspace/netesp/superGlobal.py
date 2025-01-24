@@ -60,11 +60,14 @@ def triggerItem(emptyArg):#For Screen and Menu obj's
         callback, funcWArg = obj.callback
         func, arg = funcWArg
         callback(func(arg))
-        
+
     
 #Menu and Screen register
-credits = menu.Screen("credits", "credits", ["wwwqr"], (drawMenu, (getMenuOrScreen, "main")))
-main = menu.Menu("main", [("Wifi", (drawMenu, (getMenuOrScreen, "wifi"))), ("Bluetooth", (drawMenu, (getMenuOrScreen, "bluetooth"))), ("Help", (drawScreen, (getMenuOrScreen, "help"))), ("Credits", (drawScreen, (getMenuOrScreen, "credits")))], "gui")
+credits = menu.Screen("credits", "credits", [], (drawMenu, (getMenuOrScreen, "main")))
+main = menu.Menu("main", [("Wifi", (drawMenu, (getMenuOrScreen, "wifi"))), ("Bluetooth", (drawMenu, (getMenuOrScreen, "bluetooth"))), ("ESPNow", (drawScreen, (getMenuOrScreen, "espnow"))), ("Credits", (drawScreen, (getMenuOrScreen, "credits")))], "gui")
+wifi = menu.Menu("wifi", [("Search", (drawScreen, (getMenuOrScreen, "scrn_search"))), ("Connect", (drawScreen, (getMenuOrScreen, "connect"))), ("Show IP's", (drawScreen, (getMenuOrScreen, "show_ips"))), ("Back", (drawMenu, (getMenuOrScreen, "main")))], "gui")
+scrn_search = menu.Screen("scrn_search", "gui", [], (drawMenu, (getMenuOrScreen, "wifi")))
 menus.append(main)
 menus.append(credits)
+menus.append(wifi)
 #

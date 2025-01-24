@@ -35,3 +35,12 @@ def drawIcon(name, xOffset, yOffset, active = 1):
     
     refresh()
     f.close()
+
+def displayYList(strList, marginleft):
+    for i in range(50):
+        yOffset = i
+        cls()
+        for l in strList:
+            drawTxt(l, marginleft, yOffset)
+            yOffset += 10
+        refresh()
