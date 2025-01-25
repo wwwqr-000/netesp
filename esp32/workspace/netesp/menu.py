@@ -6,8 +6,9 @@ class Menu:
         self.frame = frame
 
 class Screen:
-    def __init__(self, name, frame, textArr, callback):
+    def __init__(self, name, frame, textArr, callback, customCall = "!"):
         self.name = name
         self.frame = frame
         self.textArr = textArr
         self.callback = callback
+        self.customCall = customCall

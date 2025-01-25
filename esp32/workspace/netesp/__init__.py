@@ -1,7 +1,7 @@
-from netesp import config, screen, bus, menu, keyRegistry, superGlobal
+from netesp import screen, bus, keyRegistry, superGlobal
 from time import sleep
 
-screen.drawTxt("Loading espnet...", 0, 0)
+screen.drawTxt("Loading...", 0, 0)
 screen.refresh()
 
 screen.cls()
@@ -10,8 +10,9 @@ screen.cls()
 
 bus.start()
 keyRegistry.register()
+superGlobal.register()
 
-superGlobal.drawMenu(superGlobal.getMenuOrScreen("main"))
+superGlobal.drawMenu(superGlobal.getMenuOrScreen("menu_main"))
 screen.refresh()
 
 while True: sleep(0.1)
