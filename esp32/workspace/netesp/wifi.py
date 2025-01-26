@@ -1,4 +1,4 @@
-from netesp import screen, superGlobal
+from netesp import screen, superGlobal, config
 import network
 from time import sleep
 
@@ -9,6 +9,12 @@ class Entity:
         self.channel = channel
         self.sigStr = sigStr
         self.secLvl = secLvl
+
+def redrawScrnWFAT(frame, txt):#Redraw Screen With Frame And Text
+    screen.cls()
+    screen.drawFrame(frame, 0, 0)
+    screen.drawTxt(txt, 10, 12)
+    screen.refresh()
 
 def showAvailable(frame):
     superGlobal.networkEntityList["entities"].clear()
@@ -32,4 +38,28 @@ def showAvailable(frame):
         yStart += 10
 
     superGlobal.networkEntityList["entities"].append(("Back", superGlobal.getMenuCallback("menu_wifi")))
+    screen.refresh()
+
+def toggleSelfWifiControl(stat):
+    ap = network.WLAN(network.AP_IF)
+    ap.active(stat)
+    if (not stat):
+        superGlobal.apLocIP["entities"][0] = ""
+        redrawScrnWFAT("gui", "De-Activated.")
+        return
+
+    ap.config(essid=config.selfWifiControlSSID, password=config.selfWifiControlPW, authmode=network.AUTH_WPA_WPA2_PSK)
+    while not ap.active(): pass
+    superGlobal.apLocIP["entities"][0] = str(ap.ifconfig()[0])
+    redrawScrnWFAT("gui", "Activated.")
+
+def showIPs(frame):
+    screen.cls()
+    screen.drawFrame(frame, 0, 0)
+    res = superGlobal.apLocIP["entities"][0]
+    if (res == ""): res = "none"
+    screen.drawTxt(f"Private:", 10, 12)
+    screen.drawTxt(res, 10, 22)
+    screen.drawTxt("Public:", 10, 32)
+    screen.drawTxt("none", 10, 42)
     screen.refresh()

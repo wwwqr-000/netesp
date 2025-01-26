@@ -9,3 +9,8 @@ screenSDA = 25
 screenWidth = 127
 screenHeight = 63
 #
+
+#Wifi
+selfWifiControlSSID = "netesp"
+selfWifiControlPW = "educational_use_only"
+#

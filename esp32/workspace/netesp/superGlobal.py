@@ -3,6 +3,7 @@ from netesp import menu, screen, wifi
 menus = []#Menus contains Menu and Screen objects.
 currentMenuName = "main"#The current name of a Menu or Screen object.
 networkEntityList = {"entities": []}#A dictionary will dynamically update.
+apLocIP = {"entities": [""]}#Contains the local IP-address of the esp32 while in ap-mode
 
 def getMenuOrScreen(menuName):
     for m in menus:
@@ -94,16 +95,24 @@ def getScreenCallback(screenName): return (drawScreen, (getMenuOrScreen, screenN
     
 #Menu and Screen register
 def register():
-    scrn_credits = menu.Screen("scrn_credits", "credits", [], getScreenCallback("scrn_credits"))
+    scrn_credits = menu.Screen("scrn_credits", "credits", [], getMenuCallback("menu_main"))
     menu_main = menu.Menu("menu_main", [("Wifi", getMenuCallback("menu_wifi")), ("Bluetooth", getMenuCallback("menu_bluetooth")), ("ESPNow", getMenuCallback("menu_espnow")), ("Credits", getScreenCallback("scrn_credits"))], "gui")
-    menu_wifi = menu.Menu("menu_wifi", [("Search", getScreenCallback("scrn_search")), ("Connect", getMenuCallback("menu_connect")), ("Show IP's", (drawScreen, (getMenuOrScreen, "show_ips"))), ("Back", getMenuCallback("menu_main"))], "gui")
+    menu_wifi = menu.Menu("menu_wifi", [("Search", getScreenCallback("scrn_search")), ("Connect", getMenuCallback("menu_connect")), ("AccessPoint", getMenuCallback("menu_self_wifi_control")), ("Show IP's", (drawScreen, (getMenuOrScreen, "scrn_show_ips"))), ("Back", getMenuCallback("menu_main"))], "gui")
     scrn_search = menu.Screen("scrn_search", "gui", [], getMenuCallback("menu_wifi"), (wifi.showAvailable, "gui"))
     menu_connect = menu.Menu("menu_connect", [], "gui", networkEntityList)
     scrn_connect = menu.Screen("scrn_connect", "gui", ["W.I.P", "Keyboard..."], getMenuCallback("menu_wifi"))
+    menu_self_wifi_control = menu.Menu("menu_self_wifi_control", [("Activate", getScreenCallback("scrn_swc_activate")), ("Deactivate", getScreenCallback("scrn_swc_deactivate")), ("Back", getMenuCallback("menu_wifi"))], "gui")
+    scrn_swc_activate = menu.Screen("scrn_swc_activate", "gui", ["Activating..."], getMenuCallback("menu_self_wifi_control"), (wifi.toggleSelfWifiControl, True))
+    scrn_swc_deactivate = menu.Screen("scrn_swc_deactivate", "gui", ["De-activating..."], getMenuCallback("menu_self_wifi_control"), (wifi.toggleSelfWifiControl, False))
+    scrn_show_ips = menu.Screen("scrn_show_ips", "gui", [], getMenuCallback("menu_wifi"), (wifi.showIPs, "gui"))
     menus.append(menu_main)
     menus.append(scrn_credits)
     menus.append(menu_wifi)
     menus.append(scrn_search)
     menus.append(menu_connect)
     menus.append(scrn_connect)
+    menus.append(menu_self_wifi_control)
+    menus.append(scrn_swc_activate)
+    menus.append(scrn_swc_deactivate)
+    menus.append(scrn_show_ips)
 #
