@@ -1,1 +1,9 @@
-#W.I.P netesp web-based
+from machine import I2C, Pin
+
+f = open("netesp/config.py", "r")
+
+exec(f.read())
+
+editModeBtn = Pin(editModeTogglePin, Pin.IN, Pin.PULL_UP)
+
+if (editModeBtn.value() == 1): import netesp

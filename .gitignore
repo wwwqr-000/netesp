@@ -14,3 +14,5 @@ custom_tools/bmpToIcon/obj/Debug/main.o
 custom_tools/bmpToIcon/obj/Release/main.o
 custom_tools/bmpToFrame/bmpToFrame.layout
 esp32/buff.cache
+web-based/esp32/workspace/netesp/env.py
+web-based/esp32/buff.cache

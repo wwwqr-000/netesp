@@ -1,2 +1,0 @@
-b1 = '#W.I.P netesp web-based\n'
-f = open('boot.py', 'w'); f.write(b1); f.close(); del b1;
