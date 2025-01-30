@@ -5,6 +5,7 @@ from time import sleep
 
 wlan = network.WLAN(network.STA_IF)
 wlan.active(True)
+wlan.config(dhcp_hostname="netesp")
 wlan.connect(config.wifiSSID, config.wifiPW)
 while not wlan.isconnected(): pass
 superGlobals.IP["entities"].append(wlan.ifconfig()[0])

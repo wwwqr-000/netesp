@@ -21,6 +21,12 @@ def run():
 
     while True:
         cl, addr = s.accept()
+        clientIP, tmpPort = addr
+        if (len(superGlobals.IP["entities"]) == 1): superGlobals.IP["entities"].append(clientIP)
+        elif (clientIP != superGlobals.IP["entities"][1]):
+            cl.close()
+            continue
+        
         print('Client connected from', addr)
         request = cl.recv(1024)
         request_lines = request.decode().splitlines()
@@ -42,6 +48,6 @@ def run():
 
         print("Request:", request)
         
-        cl.send(page.send(page.homePage()))
+        cl.send(page.send(page.homePage(request)))
         cl.close()
         

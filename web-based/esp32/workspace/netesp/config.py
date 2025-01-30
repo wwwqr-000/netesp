@@ -1,4 +1,4 @@
 editModeTogglePin = 19
-wifiSSID = "wifiname"
-wifiPW = "wifipassword"
+wifiSSID = "wwwqr"
+wifiPW = "koekje123"
 webPort = 80
