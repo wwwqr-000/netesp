@@ -1,4 +1,4 @@
-from netesp import config, superGlobals, page
+from netesp import config, superGlobals, page, requestResolver
 import socket
 import network
 from time import sleep
@@ -29,25 +29,4 @@ def run():
         
         print('Client connected from', addr)
         request = cl.recv(1024)
-        request_lines = request.decode().splitlines()
-        
-        if request_lines[0].startswith('POST'):
-            for line in request_lines:
-                if line.startswith('Content-Length:'):
-                    content_length = int(line.split(': ')[1])
-                    break
-            else:
-                content_length = 0
-            body = request[-content_length:] if content_length > 0 else b''
-            print("Body:", body.decode())
-            if content_length > 0:
-                body_str = body.decode()
-                parsed_body = parse_query_string(body_str)
-                name_value = parsed_body.get('led', '')
-                print("Led:", name_value)
-
-        print("Request:", request)
-        
-        cl.send(page.send(page.homePage(request)))
-        cl.close()
-        
+        requestResolver.handle(request, cl)
